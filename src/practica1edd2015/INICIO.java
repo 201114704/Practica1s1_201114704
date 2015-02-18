@@ -34,7 +34,7 @@ public class INICIO extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("PLANTAS VS ZOMBIE 3 GUATEMALTECO");
+        jLabel1.setText("PLANTAS VS ZOMBIE 2 GUATEMALTECO");
 
         jButton1.setText("JUGAR >>");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
