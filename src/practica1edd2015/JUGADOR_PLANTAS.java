@@ -6,6 +6,9 @@
 
 package practica1edd2015;
 
+import javax.swing.JOptionPane;
+
+
 /**
  *
  * @author Cris
@@ -15,6 +18,11 @@ public class JUGADOR_PLANTAS extends javax.swing.JFrame {
     /**
      * Creates new form JUGADOR_PLANTAS
      */
+    
+    public static LISTA_JUGADOR Lista_JUGADOR = new LISTA_JUGADOR();
+    boolean BANDERA_JUGADOR_AGREGADO = false;    
+    public static int Cantidad_Plantas_Selecciondas=0;
+    
     public JUGADOR_PLANTAS() {
         initComponents();
     }
@@ -28,6 +36,7 @@ public class JUGADOR_PLANTAS extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jDialog1 = new javax.swing.JDialog();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -36,17 +45,38 @@ public class JUGADOR_PLANTAS extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
+        javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
+        jDialog1.getContentPane().setLayout(jDialog1Layout);
+        jDialog1Layout.setHorizontalGroup(
+            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        jDialog1Layout.setVerticalGroup(
+            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setText("JUGADOR PLANTAS");
 
         jLabel2.setText("Nombre Jugador:");
 
-        jLabel3.setText("Cantidad:");
+        jLabel3.setText("Cantidad de Plantas: ");
 
         jButton1.setText("Agregar más Campos");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("CONTINUAR >>");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -67,12 +97,11 @@ public class JUGADOR_PLANTAS extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jButton1))))
                 .addContainerGap(86, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton2)
                 .addGap(26, 26, 26))
         );
@@ -98,6 +127,43 @@ public class JUGADOR_PLANTAS extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        if(jTextField1.getText().equals("") || jTextField2.getText().equals("")){
+            JOptionPane.showMessageDialog(rootPane, "Debe de llenar todos los campos");
+        }
+        else{
+            if(!this.BANDERA_JUGADOR_AGREGADO){ // pregunta si el jugador ya ha sido registrado
+            //Agregamos al jugador
+            this.BANDERA_JUGADOR_AGREGADO = true;
+            this.Lista_JUGADOR.INSERTAR(jTextField1.getText(), Integer.parseInt(jTextField2.getText()));
+            Cantidad_Plantas_Selecciondas = Integer.parseInt(jTextField2.getText());
+            }
+        CONFIGURACION_PLANTAS config_Plantas = new CONFIGURACION_PLANTAS();
+        config_Plantas.show();
+        this.dispose();
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        if(jTextField1.getText().equals("") || jTextField2.getText().equals("")){
+            JOptionPane.showMessageDialog(rootPane, "Debe de llenar todos los campos");
+        }
+        else{
+            if(!this.BANDERA_JUGADOR_AGREGADO){ // pregunta si el jugador ya ha sido registrado
+            //Agregamos al jugador
+            this.BANDERA_JUGADOR_AGREGADO = true;
+            this.Lista_JUGADOR.INSERTAR(jTextField1.getText(), Integer.parseInt(jTextField2.getText()));
+            Cantidad_Plantas_Selecciondas = Integer.parseInt(jTextField2.getText());
+            }
+        String TEXTO_INGRESADO=JOptionPane.showInputDialog("Ingrese TEXTO"); 
+        if(TEXTO_INGRESADO!=null){ // pregunta que si el campo es diferente de vacio
+        this.Lista_JUGADOR.INGRESAR_A_LISTA_JUGADOR_NUEVOS_CAMPOS(jTextField1.getText(), TEXTO_INGRESADO);
+        }
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -137,6 +203,7 @@ public class JUGADOR_PLANTAS extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
