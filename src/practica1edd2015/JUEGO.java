@@ -6,8 +6,13 @@
 
 package practica1edd2015;
 
+import java.awt.Desktop;
 import java.awt.Image;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.URL;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -120,8 +125,56 @@ public class JUEGO extends javax.swing.JFrame {
         return tmpIcon;
     }
         
+    public String Obtener_Ruta(int i){
+        String ruta = "";
+     switch(i){ 
+         case 0: ruta = "/Archivos/Jugadores.txt";
+             break;
+         case 1: ruta = "/Archivos/Plantas.txt";
+             break;
+         case 2: ruta = "/Archivos/Zombies.txt";
+             break;
+         case 3: ruta = "/Archivos/Pila.txt";
+             break;
+         case 4: ruta = "/Archivos/Cola.txt";
+             break;
+         case 5: ruta = "/Archivos/Matriz.txt";
+             break;
+     }
+     return ruta;
+    }
     
     
+    public void Generar_Grahpviz(String ruta, String nombre){
+        try {
+//path del dot.exe,por lo general es la misma, pero depende de donde hayas instalado el paquete de Graphviz
+            String dotPath = "C:\\Program Files (x86)\\Graphviz 2.28\\bin\\dot.exe";
+//path del archivo creado con el codigo del graphviz que queremos
+            String fileInputPath = ruta;
+//path de salida del grafo, es decir el path de la imagen que vamos a crear con graphviz
+            String Imagen = nombre;
+            String fileOutputPath = Imagen;
+//tipo de imagen de salida, en este caso es jpg
+            String tParam = "-Tjpg";
+            String tOParam = "-o";
+
+//concatenamos nuestras direcciones. Lo que hice es crear un vector, para poder editar las direcciones de entrada y salida, usando las variables antes inicializadas
+//recordemos el comando en la consola de windows: C:\Archivos de programa\Graphviz 2.21\bin\dot.exe -Tjpg grafo1.txt -o grafo1.jpg Esto es lo que concatenamos en el vector siguiente:
+            String[] cmd = new String[5];
+            cmd[0] = dotPath;
+            cmd[1] = tParam;
+            cmd[2] = fileInputPath;
+            cmd[3] = tOParam;
+            cmd[4] = fileOutputPath;
+//Invocamos nuestra clase 
+            Runtime rt = Runtime.getRuntime();
+//Ahora ejecutamos como lo hacemos en consola
+            rt.exec( cmd );
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }  finally {
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -135,6 +188,12 @@ public class JUEGO extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
+        jMenuItem6 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -142,6 +201,50 @@ public class JUEGO extends javax.swing.JFrame {
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Ver");
+
+        jMenuItem1.setText("Graphviz Jugadores");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem1);
+
+        jMenuItem2.setText("Graphviz Plantas");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem2);
+
+        jMenuItem3.setText("Graphviz Zombies");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem3);
+
+        jMenuItem4.setText("Graphviz Pila");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem4);
+
+        jMenuItem5.setText("Graphviz Cola");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem5);
+
+        jMenuItem6.setText("Graphviz Matriz");
+        jMenu2.add(jMenuItem6);
+
         jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
@@ -159,6 +262,164 @@ public class JUEGO extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    public PrintWriter crearArchivo(String nombre) throws IOException{
+//Las siguientes 3 líneas nos permite crear un archivo y escribir en el
+        File archivo = new File(nombre);
+        FileWriter writer = new FileWriter(archivo);
+        PrintWriter salida = new PrintWriter(writer);
+        return salida;
+    }    
+
+    public PrintWriter escribirArchivoCola(PrintWriter salida)throws Exception{
+  //Este método permite escribir en el archivo
+salida.append("digraph G");
+salida.append("{");
+ //Este método sirve para dar un salto de línea
+ salida.println();
+ salida.append("node[shape=box]; graph[rankdir=UD]");
+ salida.println();
+//Tambien el método write nos permite escribir
+ salida.append(Pre_JUEGO.Cola.RECORRER_GRAPHVIZ());
+ salida.append("}"); 
+ //Al Igual que print
+ //salida.print(new String(cadena));
+//Es importante no olvidar cerrar el archivo
+ salida.close();
+ return salida;
+  }
+    
+    public PrintWriter escribirArchivoPila(PrintWriter salida)throws Exception{
+  //Este método permite escribir en el archivo
+salida.append("digraph G");
+salida.append("{");
+ //Este método sirve para dar un salto de línea
+ salida.println();
+ salida.append("node[shape=box]; graph[rankdir=UD]");
+ salida.println();
+//Tambien el método write nos permite escribir
+ salida.append(Pre_JUEGO.Pila.RECORRER_GRAPHVIZ());
+ salida.append("}"); 
+ //Al Igual que print
+ //salida.print(new String(cadena));
+//Es importante no olvidar cerrar el archivo
+ salida.close();
+ return salida;
+  }
+    
+     public PrintWriter escribirArchivoPlantas(PrintWriter salida)throws Exception{
+  //Este método permite escribir en el archivo
+salida.append("digraph G");
+salida.append("{");
+ //Este método sirve para dar un salto de línea
+ salida.println();
+ salida.append("node[shape=box]; graph[rankdir=UD]");
+ salida.println();
+//Tambien el método write nos permite escribir
+ salida.append(CONFIGURACION_PLANTAS.Lista_Plantas.RECORRER_GRAPHVIZ());
+ salida.append("}"); 
+ //Al Igual que print
+ //salida.print(new String(cadena));
+//Es importante no olvidar cerrar el archivo
+ salida.close();
+ return salida;
+  }
+     public PrintWriter escribirArchivoZombies(PrintWriter salida)throws Exception{
+  //Este método permite escribir en el archivo
+salida.append("digraph G");
+salida.append("{");
+ //Este método sirve para dar un salto de línea
+ salida.println();
+ salida.append("node[shape=box]; graph[rankdir=UD]");
+ salida.println();
+//Tambien el método write nos permite escribir
+ salida.append(CONFIGURACION_ZOMBIES.Lista_Zombies.RECORRER_GRAPHVIZ());
+ salida.append("}"); 
+ //Al Igual que print
+ //salida.print(new String(cadena));
+//Es importante no olvidar cerrar el archivo
+ salida.close();
+ return salida;
+  }
+     
+     public PrintWriter escribirArchivoJugadores(PrintWriter salida)throws Exception{
+  //Este método permite escribir en el archivo
+salida.append("digraph G");
+salida.append("{");
+ //Este método sirve para dar un salto de línea
+ salida.println();
+ salida.append("node[shape=box]; graph[rankdir=UD]");
+ salida.println();
+//Tambien el método write nos permite escribir
+ salida.append(JUGADOR_PLANTAS.Lista_JUGADOR.RECORRER_GRAPHVIZ());
+ salida.append("}"); 
+ //Al Igual que print
+ //salida.print(new String(cadena));
+//Es importante no olvidar cerrar el archivo
+ salida.close();
+ return salida;
+  }
+       
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        // TODO add your handling code here:
+        try {
+            this.escribirArchivoCola(this.crearArchivo("Cola.txt"));
+            this.Generar_Grahpviz("Cola.txt", "Cola.jpg");
+            File file = new File("Cola.jpg");
+            Desktop.getDesktop().open(file);
+        } catch (Exception ex) {
+            System.out.println("Error: " + ex.getMessage());
+        }      
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        // TODO add your handling code here:
+        try {
+            this.escribirArchivoPila(this.crearArchivo("Pila.txt"));
+            this.Generar_Grahpviz("Pila.txt", "Pila.jpg");
+            File file = new File("Pila.jpg");
+            Desktop.getDesktop().open(file);
+        } catch (Exception ex) {
+            System.out.println("Error: " + ex.getMessage());
+        }
+        
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+        try {
+            this.escribirArchivoPlantas(this.crearArchivo("Plantas.txt"));
+            this.Generar_Grahpviz("Plantas.txt", "Plantas.jpg");
+            File file = new File("Plantas.jpg");
+            Desktop.getDesktop().open(file);
+        } catch (Exception ex) {
+            System.out.println("Error: " + ex.getMessage());
+        }
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        // TODO add your handling code here:
+        try {
+            this.escribirArchivoZombies(this.crearArchivo("Zombies.txt"));
+            this.Generar_Grahpviz("Zombies.txt", "Zombies.jpg");
+            File file = new File("Zombies.jpg");
+            Desktop.getDesktop().open(file);
+        } catch (Exception ex) {
+            System.out.println("Error: " + ex.getMessage());
+        }
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        try {
+            this.escribirArchivoJugadores(this.crearArchivo("Jugadores.txt"));
+            this.Generar_Grahpviz("Jugadores.txt", "Jugadores.jpg");
+            File file = new File("Jugadores.jpg");
+            Desktop.getDesktop().open(file);
+        } catch (Exception ex) {
+            System.out.println("Error: " + ex.getMessage());
+        }
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -199,5 +460,11 @@ public class JUEGO extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
     // End of variables declaration//GEN-END:variables
 }
