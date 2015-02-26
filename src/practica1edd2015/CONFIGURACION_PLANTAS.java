@@ -20,7 +20,7 @@ public class CONFIGURACION_PLANTAS extends javax.swing.JFrame {
     /**
      * Creates new form CONFIGURACION_PLANTAS
      */
-    public static int Numero_Imagen_Seleccionada = 0;
+    public int Numero_Imagen_Seleccionada = 0;
     public static LISTA_PLANTAS Lista_Plantas = new LISTA_PLANTAS();
     //instancia
     private JChomboBox jchombobox;     
@@ -37,7 +37,7 @@ public class CONFIGURACION_PLANTAS extends javax.swing.JFrame {
 
     public CONFIGURACION_PLANTAS() {
         initComponents();
-        
+        this.setLocationRelativeTo(null);
         //=========================
         //se crea el jcombo pasando la cantidad de imagenes que tendra el jcombobox
         jchombobox = new JChomboBox( items.length );
@@ -89,6 +89,7 @@ public class CONFIGURACION_PLANTAS extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);

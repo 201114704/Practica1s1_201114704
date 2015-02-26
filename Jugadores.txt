@@ -1,0 +1,8 @@
+digraph G{
+node[shape=box]; graph[rankdir=UD]
+Cris->Desc 
+Cris-> Segundo 
+Segundo->Tercero 
+Desc-> dos 
+dos->tres 
+}

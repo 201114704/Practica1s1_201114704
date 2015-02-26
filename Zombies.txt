@@ -1,0 +1,4 @@
+digraph G{
+node[shape=box]; graph[rankdir=UD]
+Zombi2->Z3
+Z3->NULL}

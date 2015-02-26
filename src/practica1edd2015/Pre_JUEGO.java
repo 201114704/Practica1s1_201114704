@@ -17,8 +17,28 @@ public class Pre_JUEGO extends javax.swing.JFrame {
     /**
      * Creates new form Pre_JUEGO
      */
+    public static int Numero_Filas=0;
+    public static int Numero_Columnas = 0;
+    public static PILA Pila = new PILA();
+    public static COLA Cola = new COLA();
+    
     public Pre_JUEGO() {
         initComponents();
+        this.setLocationRelativeTo(null);
+    }
+    
+    public void Preguntar_Dimensiones(){
+        String FILA_MATRIZ =JOptionPane.showInputDialog("Ingrese el Numero de Filas de la Matriz");
+        String COLUMNA_MATRIZ = JOptionPane.showInputDialog("Ingrese el Numero de Columnas de la Matriz");
+        if(FILA_MATRIZ!=null && COLUMNA_MATRIZ!=null){ // pregunta que si el campo es diferente de vacio
+            Numero_Filas = Integer.parseInt(FILA_MATRIZ);
+            Numero_Columnas = Integer.parseInt(COLUMNA_MATRIZ);
+            JUEGO Juego = new JUEGO();
+            Juego.show();
+            this.dispose();
+        }else{
+            JOptionPane.showMessageDialog(rootPane, "Son obligatorios los campos de Filas y Columnas de la Matriz");
+        }
     }
 
     /**
@@ -40,6 +60,7 @@ public class Pre_JUEGO extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         jLabel1.setText("Datos  de Jugadores y Personajes Cargados");
 
@@ -145,12 +166,10 @@ public class Pre_JUEGO extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        JUGADOR_PLANTAS.Lista_JUGADOR.RECORRER_lISTA_JUGADOR();
-        CONFIGURACION_PLANTAS.Lista_Plantas.RECORRER_lISTA_PLANTAS();
-        CONFIGURACION_ZOMBIES.Lista_Zombies.RECORRER_lISTA_ZOMBIES();
-        JUEGO Juego = new JUEGO();
-        Juego.show();
-        this.dispose();
+        //JUGADOR_PLANTAS.Lista_JUGADOR.RECORRER_lISTA_JUGADOR();
+        //CONFIGURACION_PLANTAS.Lista_Plantas.RECORRER_lISTA_PLANTAS();
+        //CONFIGURACION_ZOMBIES.Lista_Zombies.RECORRER_lISTA_ZOMBIES();
+        this.Preguntar_Dimensiones();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed

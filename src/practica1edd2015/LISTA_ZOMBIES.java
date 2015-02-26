@@ -12,24 +12,25 @@ import javax.swing.JOptionPane;
  *
  * @author Cris
  */
-public class LISTA_PLANTAS {
-    public PERSONAJE_PLANTAS RAIZ;
+public class LISTA_ZOMBIES {
     
-    public LISTA_PLANTAS(){
-    this.RAIZ = null;
+    public PERSONAJE_ZOMBIES RAIZ;
+    
+    public LISTA_ZOMBIES(){
+     this.RAIZ = null;   
     }
     
     public void INSERTAR(String Nombre,String Imagen,int Ataque, int Defensa,boolean TipoAtaque){
-        PERSONAJE_PLANTAS nuevo = new PERSONAJE_PLANTAS(Nombre,Imagen,Ataque,Defensa,TipoAtaque);
+        PERSONAJE_ZOMBIES nuevo = new PERSONAJE_ZOMBIES(Nombre,Imagen,Ataque,Defensa,TipoAtaque);
         
         if(RAIZ==null){
             RAIZ = nuevo;
         }
         else{
             
-            PERSONAJE_PLANTAS NODOAUX = RAIZ;
+            PERSONAJE_ZOMBIES NODOAUX = this.RAIZ;
             while(NODOAUX.SIGUIENTE!=null){
-                NODOAUX = NODOAUX.SIGUIENTE;
+               NODOAUX = NODOAUX.SIGUIENTE;
             }
             NODOAUX.SIGUIENTE = nuevo;
             nuevo.ANTERIOR = NODOAUX;
@@ -38,11 +39,12 @@ public class LISTA_PLANTAS {
     }
     
     public void BUSCAR(String Nombre){
-    PERSONAJE_PLANTAS NODOAUX = RAIZ;
+    PERSONAJE_ZOMBIES NODOAUX = RAIZ;
     boolean ENCONTRADO = false;
+    
     while(NODOAUX!=null){
         if(NODOAUX.NOMBRE.equals(Nombre)){
-            MODIFICAR.Tipo = "PLANTA";
+            MODIFICAR.Tipo = "ZOMBIE";
             MODIFICAR.NombreOriginalRecibido_Nodo = NODOAUX.NOMBRE;
             MODIFICAR.NombreRecibido_Nodo = NODOAUX.NOMBRE;
             MODIFICAR.AtaqueRecibido_Nodo = Integer.toString(NODOAUX.ATAQUE);
@@ -58,12 +60,12 @@ public class LISTA_PLANTAS {
         MODIFICAR Modificar = new MODIFICAR();
         Modificar.show();
     }else{
-        JOptionPane.showMessageDialog(null, "NO SE ENCONTRO LA PLANTA!");
+        JOptionPane.showMessageDialog(null, "NO SE ENCONTRO EL ZOMBIE!");
     }
     }
     
     public void MODIFICAR(String NombreOriginal,String NombreNuevo,int Ataque, int Defensa,boolean TipoAtaque){
-    PERSONAJE_PLANTAS NODOAUX = RAIZ;
+    PERSONAJE_ZOMBIES NODOAUX = RAIZ;
     
     while(NODOAUX!=null){
         if(NODOAUX.NOMBRE.equals(NombreOriginal)){
@@ -78,8 +80,8 @@ public class LISTA_PLANTAS {
     }
     
     public void ELIMINAR(String Nombre){
-    PERSONAJE_PLANTAS NODOAUX = RAIZ;
-    PERSONAJE_PLANTAS NODOULTIMO = RAIZ;
+    PERSONAJE_ZOMBIES NODOAUX = RAIZ;
+    PERSONAJE_ZOMBIES NODOULTIMO = RAIZ;
     boolean ELIMINADO = false;
     while (NODOULTIMO.SIGUIENTE != null)
     {
@@ -94,7 +96,7 @@ public class LISTA_PLANTAS {
                 if (NODOAUX.NOMBRE.equals(Nombre) && RAIZ.SIGUIENTE == null) // si es un unico nodo
                 {
                     RAIZ = null;
-                    ELIMINADO = true; //ELIMINADO
+                    ELIMINADO = true;//ELIMINADO
                     break;
                 }
                 else if (RAIZ.NOMBRE.equals(Nombre)) // si es el primero el eliminado
@@ -129,8 +131,9 @@ public class LISTA_PLANTAS {
     }
     }
     
-    public void RECORRER_lISTA_PLANTAS(){
-        PERSONAJE_PLANTAS NODOAUX = RAIZ;
+    
+    public void RECORRER_lISTA_ZOMBIES(){
+        PERSONAJE_ZOMBIES NODOAUX = RAIZ;
         
         while(NODOAUX!=null){
             System.out.println(NODOAUX.NOMBRE);
@@ -138,17 +141,16 @@ public class LISTA_PLANTAS {
         }
     }
     
-    public void LLENAR_COLA(){
-        PERSONAJE_PLANTAS NODOAUX = RAIZ;
-   
+        public void LLENAR_PILA(){
+        PERSONAJE_ZOMBIES NODOAUX = RAIZ;
         while(NODOAUX!=null){
-            Pre_JUEGO.Cola.PUSH(NODOAUX.NOMBRE,NODOAUX.IMAGEN,NODOAUX.ATAQUE,NODOAUX.DEFENSA,NODOAUX.TIPO_ATAQUE);
+            Pre_JUEGO.Pila.PUSH(NODOAUX.NOMBRE,NODOAUX.IMAGEN,NODOAUX.ATAQUE,NODOAUX.DEFENSA,NODOAUX.TIPO_ATAQUE);
             NODOAUX = NODOAUX.SIGUIENTE;
         }
     }
-    
+        
        public String RECORRER_GRAPHVIZ(){
-       PERSONAJE_PLANTAS NODOAUX = this.RAIZ;
+       PERSONAJE_ZOMBIES NODOAUX = this.RAIZ;
        String Graph = "";
        while(NODOAUX!=null){
        Graph += NODOAUX.NOMBRE +"->";

@@ -7,26 +7,23 @@
 package practica1edd2015;
 
 import javax.swing.JOptionPane;
-
+import static practica1edd2015.JUGADOR_PLANTAS.Cantidad_Plantas_Selecciondas;
 
 /**
  *
  * @author Cris
  */
-public class JUGADOR_PLANTAS extends javax.swing.JFrame {
+public class JUGADOR_ZOMBIES extends javax.swing.JFrame {
 
     /**
-     * Creates new form JUGADOR_PLANTAS
+     * Creates new form JUGADOR_ZOMBIES
      */
     
-    public static LISTA_JUGADOR Lista_JUGADOR = new LISTA_JUGADOR();
-    boolean BANDERA_JUGADOR_AGREGADO = false;    
-    public static int Cantidad_Plantas_Selecciondas=0;
-    
-    public JUGADOR_PLANTAS() {
+    boolean BANDERA_JUGADOR_AGREGADO = false; 
+    public static int Cantidad_Zombies_Selecciondos=0;
+    public JUGADOR_ZOMBIES() {
         initComponents();
         this.setLocationRelativeTo(null);
-        this.setBackground(new java.awt.Color(0,204,0));
     }
 
     /**
@@ -38,35 +35,22 @@ public class JUGADOR_PLANTAS extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jDialog1 = new javax.swing.JDialog();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
-        javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
-        jDialog1.getContentPane().setLayout(jDialog1Layout);
-        jDialog1Layout.setHorizontalGroup(
-            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        jDialog1Layout.setVerticalGroup(
-            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setBackground(new java.awt.Color(0, 204, 0));
         setUndecorated(true);
 
-        jLabel1.setText("JUGADOR PLANTAS");
+        jLabel1.setText("JUGADOR ZOMBIES");
 
-        jLabel2.setText("Nombre Jugador:");
+        jLabel2.setText("Nombre del Jugador:");
 
-        jLabel3.setText("Cantidad de Plantas: ");
+        jLabel3.setText("Cantidad de Zombies: ");
 
         jButton1.setText("Agregar más Campos");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -75,7 +59,7 @@ public class JUGADOR_PLANTAS extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("CONTINUAR >>");
+        jButton2.setText("FINALIZAR");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -89,36 +73,36 @@ public class JUGADOR_PLANTAS extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(180, 180, 180)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(190, 190, 190)
+                        .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(42, 42, 42)
+                        .addGap(36, 36, 36)
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jButton1))))
-                .addContainerGap(86, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2)
-                .addGap(26, 26, 26))
+                                .addComponent(jButton1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 196, Short.MAX_VALUE)
+                                .addComponent(jButton2)))))
+                .addGap(28, 28, 28))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(25, 25, 25)
+                .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -134,37 +118,37 @@ public class JUGADOR_PLANTAS extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        if(jTextField1.getText().equals("") || jTextField2.getText().equals("")){
+         if(jTextField1.getText().equals("") || jTextField2.getText().equals("")){
             JOptionPane.showMessageDialog(rootPane, "Debe de llenar todos los campos");
         }
         else{
-            if(!this.BANDERA_JUGADOR_AGREGADO){ // pregunta si el jugador ya ha sido registrado
+            if(!this.BANDERA_JUGADOR_AGREGADO){
             //Agregamos al jugador
             this.BANDERA_JUGADOR_AGREGADO = true;
-            this.Lista_JUGADOR.INSERTAR(jTextField1.getText(), Integer.parseInt(jTextField2.getText()));
-            Cantidad_Plantas_Selecciondas = Integer.parseInt(jTextField2.getText());
-            }
-        CONFIGURACION_PLANTAS config_Plantas = new CONFIGURACION_PLANTAS();
-        config_Plantas.show();
-        this.dispose();
+            JUGADOR_PLANTAS.Lista_JUGADOR.INSERTAR(jTextField1.getText(), Integer.parseInt(jTextField2.getText()));
+            Cantidad_Zombies_Selecciondos = Integer.parseInt(jTextField2.getText());
+        }
+            CONFIGURACION_ZOMBIES Config_Zombies = new CONFIGURACION_ZOMBIES();
+            Config_Zombies.show();
+            this.dispose();
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        // TODO add your handling code here:        
         if(jTextField1.getText().equals("") || jTextField2.getText().equals("")){
             JOptionPane.showMessageDialog(rootPane, "Debe de llenar todos los campos");
         }
         else{
-            if(!this.BANDERA_JUGADOR_AGREGADO){ // pregunta si el jugador ya ha sido registrado
+            if(!this.BANDERA_JUGADOR_AGREGADO){
             //Agregamos al jugador
             this.BANDERA_JUGADOR_AGREGADO = true;
-            this.Lista_JUGADOR.INSERTAR(jTextField1.getText(), Integer.parseInt(jTextField2.getText()));
-            Cantidad_Plantas_Selecciondas = Integer.parseInt(jTextField2.getText());
-            }
+            JUGADOR_PLANTAS.Lista_JUGADOR.INSERTAR(jTextField1.getText(), Integer.parseInt(jTextField2.getText()));
+            Cantidad_Zombies_Selecciondos = Integer.parseInt(jTextField2.getText());
+        }
         String TEXTO_INGRESADO=JOptionPane.showInputDialog("Ingrese TEXTO"); 
-        if(TEXTO_INGRESADO!=null){ // pregunta que si el campo es diferente de vacio
-        this.Lista_JUGADOR.INGRESAR_A_LISTA_JUGADOR_NUEVOS_CAMPOS(jTextField1.getText(), TEXTO_INGRESADO);
+        if(TEXTO_INGRESADO!=null){
+        JUGADOR_PLANTAS.Lista_JUGADOR.INGRESAR_A_LISTA_JUGADOR_NUEVOS_CAMPOS(jTextField1.getText(), TEXTO_INGRESADO);
         }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -186,20 +170,20 @@ public class JUGADOR_PLANTAS extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(JUGADOR_PLANTAS.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JUGADOR_ZOMBIES.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(JUGADOR_PLANTAS.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JUGADOR_ZOMBIES.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(JUGADOR_PLANTAS.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JUGADOR_ZOMBIES.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(JUGADOR_PLANTAS.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JUGADOR_ZOMBIES.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JUGADOR_PLANTAS().setVisible(true);
+                new JUGADOR_ZOMBIES().setVisible(true);
             }
         });
     }
@@ -207,7 +191,6 @@ public class JUGADOR_PLANTAS extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

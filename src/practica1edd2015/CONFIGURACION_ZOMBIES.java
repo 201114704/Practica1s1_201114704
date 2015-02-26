@@ -6,6 +6,13 @@
 
 package practica1edd2015;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+import static practica1edd2015.CONFIGURACION_PLANTAS.Lista_Plantas;
+
+
 /**
  *
  * @author Cris
@@ -15,8 +22,72 @@ public class CONFIGURACION_ZOMBIES extends javax.swing.JFrame {
     /**
      * Creates new form CONFIGURACION_ZOMBIES
      */
+    public static LISTA_ZOMBIES Lista_Zombies = new LISTA_ZOMBIES();
+    public int Numero_Imagen_Seleccionada = 0;
+    private JChomboBox jchombobox;     
+    //Array de imagenes
+    private ImageIcon[] items =
+    {            
+            new ImageIcon(getClass().getResource("/Imagenes/Zombies/zombie1.jpg")),
+            new ImageIcon(getClass().getResource("/Imagenes/Zombies/zombie2.gif")),
+            new ImageIcon(getClass().getResource("/Imagenes/Zombies/zombie3.jpg")),
+            new ImageIcon(getClass().getResource("/Imagenes/Zombies/zombie4.gif")),
+            new ImageIcon(getClass().getResource("/Imagenes/Zombies/zombie5.png")),
+            new ImageIcon(getClass().getResource("/Imagenes/Zombies/zombie6.jpg"))            
+    };
     public CONFIGURACION_ZOMBIES() {
         initComponents();
+        this.setLocationRelativeTo(null);
+         //=========================
+        //se crea el jcombo pasando la cantidad de imagenes que tendra el jcombobox
+        jchombobox = new JChomboBox( items.length );
+        //se crea y añade un render pasando un array con las imagenes
+        JChomboRenderer render = new JChomboRenderer( items );
+        jchombobox.setRenderer(render);
+        //se añade jcombo al JFrame
+        //this.add(jchombobox);   
+        this.jPanel1.add(jchombobox);
+        //Evento Listener
+        jchombobox.addActionListener (new ActionListener () {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //Acción cuando se selecciona un valor del jcombo
+                //System.out.println( "Se selecciono imagen " +  jchombobox.getSelectedItem() );
+                Numero_Imagen_Seleccionada = jchombobox.getSelectedIndex();
+                //System.out.println(Numero_Imagen_Seleccionada);
+            }
+        });
+        //=========================
+        
+        jLabel7.setText(Integer.toString(JUGADOR_ZOMBIES.Cantidad_Zombies_Selecciondos));
+        jLabel9.setText(Integer.toString(JUGADOR_ZOMBIES.Cantidad_Zombies_Selecciondos));
+    }
+    
+    public String Retornar_Ruta(int numero){
+        String ruta = "";
+        switch(numero){
+            case 0: ruta = "/Imagenes/Zombies/zombie1.jpg";
+                break;
+            case 1: ruta = "/Imagenes/Zombies/zombie2.gif";
+                break;
+            case 2: ruta = "/Imagenes/Zombies/zombie3.jpg";
+                break;
+            case 3: ruta = "/Imagenes/Zombies/zombie4.gif";
+                break;
+            case 4: ruta = "/Imagenes/Zombies/zombie5.png";
+                break;
+            case 5: ruta = "/Imagenes/Zombies/zombie6.jpg";
+                break;
+        }
+        return ruta;
+    }
+    
+    public boolean Retornar_TipoAtaque(int desicion){
+        boolean Tipo=false;
+        if(desicion==1){
+            Tipo=true;
+        }
+        return Tipo;
     }
 
     /**
@@ -45,6 +116,7 @@ public class CONFIGURACION_ZOMBIES extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         jLabel9.setText("jLabel9");
 
@@ -61,16 +133,21 @@ public class CONFIGURACION_ZOMBIES extends javax.swing.JFrame {
         jLabel1.setText("Nombre: ");
 
         jButton1.setText("Seguir >>");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 240, Short.MAX_VALUE)
+            .addGap(0, 100, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 48, Short.MAX_VALUE)
+            .addGap(0, 80, Short.MAX_VALUE)
         );
 
         jLabel4.setText("Defensa: ");
@@ -84,11 +161,14 @@ public class CONFIGURACION_ZOMBIES extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(37, 37, 37)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(43, 43, 43)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(134, 134, 134)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -115,7 +195,7 @@ public class CONFIGURACION_ZOMBIES extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 67, Short.MAX_VALUE)
                                     .addComponent(jTextField3))))
-                        .addContainerGap(18, Short.MAX_VALUE))
+                        .addContainerGap(20, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addGap(18, 18, 18)
@@ -138,28 +218,50 @@ public class CONFIGURACION_ZOMBIES extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addComponent(jLabel2)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGap(66, 66, 66)
                         .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(11, 11, 11)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel5))
-                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addContainerGap(22, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(11, 11, 11)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel5)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+         if(jTextField1.getText().equals("") || jTextField2.getText().equals("") || jTextField3.getText().equals("")){
+            JOptionPane.showMessageDialog(rootPane, "Debe llenar todos los campos");
+        }else{
+            if(JUGADOR_ZOMBIES.Cantidad_Zombies_Selecciondos==1){
+            Lista_Zombies.INSERTAR(jTextField1.getText(), this.Retornar_Ruta(Numero_Imagen_Seleccionada),Integer.parseInt(jTextField2.getText()), Integer.parseInt(jTextField3.getText()),this.Retornar_TipoAtaque(jComboBox1.getSelectedIndex()));
+            Pre_JUEGO Pre_Juego = new Pre_JUEGO();
+            Pre_Juego.show();
+            this.dispose();
+            }else{
+            Lista_Zombies.INSERTAR(jTextField1.getText(), this.Retornar_Ruta(Numero_Imagen_Seleccionada),Integer.parseInt(jTextField2.getText()), Integer.parseInt(jTextField3.getText()),this.Retornar_TipoAtaque(jComboBox1.getSelectedIndex()));
+            jLabel9.setText(Integer.toString(--JUGADOR_ZOMBIES.Cantidad_Zombies_Selecciondos));
+            Numero_Imagen_Seleccionada=0;
+            jTextField1.setText("");
+            jTextField2.setText("");
+            jTextField3.setText("");
+            }
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

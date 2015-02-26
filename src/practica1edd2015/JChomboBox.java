@@ -10,7 +10,7 @@ public class JChomboBox extends JComboBox {
     /** COnstructor de clase */    
     public JChomboBox( int num_items  )
     {   
-        Dimension d = new Dimension(206,26);
+        Dimension d = new Dimension(100,80);
         this.setSize(d);
         this.setPreferredSize(d);
         //Indices para las imagenes
