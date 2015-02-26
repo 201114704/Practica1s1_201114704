@@ -32,10 +32,11 @@ public class JUEGO extends javax.swing.JFrame {
     public JLabel[][] MATRIZ_JUEGO;
     public JLabel[][] COLA_PLANTAS;
     public JLabel[][] PILA_ZOMBIES;
-    int k,m=0;
+    int k,m,k2,m2=0;
     
     public JUEGO() {
         initComponents();
+        this.setLocationRelativeTo(null);
         
         CONFIGURACION_PLANTAS.Lista_Plantas.LLENAR_COLA();
         CONFIGURACION_ZOMBIES.Lista_Zombies.LLENAR_PILA();
@@ -53,7 +54,7 @@ public class JUEGO extends javax.swing.JFrame {
             for(int j=0;j<Columna;j++){ 
                 MATRIZ_JUEGO[i][j] = new JLabel();           
                 MATRIZ_JUEGO[i][j].setBounds((i*(DIMENSION_TABLERO_X / Fila)+ 120), (j*(DIMENSION_TABLERO_Y / Columna))+10, DIMENSION_TABLERO_X / Fila, DIMENSION_TABLERO_Y / Columna);
-                MATRIZ_JUEGO[i][j].setIcon(ajustarImagen("Campo.jpg"));
+                MATRIZ_JUEGO[i][j].setIcon(ajustarImagen("/Imagenes/Campo.jpg"));
                 MATRIZ_JUEGO[i][j].setBorder(BorderFactory.createEmptyBorder(0,0,0,0));
                 //this.jPanel4.add(MATRIZ_JUEGO[i][j]);
                 this.add(MATRIZ_JUEGO[i][j]);
@@ -74,9 +75,8 @@ public class JUEGO extends javax.swing.JFrame {
                 k=i;
                 m=j;
                 COLA_PLANTAS[k][m].addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-                
                     public void mouseDragged(java.awt.event.MouseEvent evt) {
-                    labelMouseDragged(evt,k,m);
+                    labelMouseDragged(evt,k,m,"Planta");
                     }
                 });
                 Bandera= true;
@@ -87,31 +87,48 @@ public class JUEGO extends javax.swing.JFrame {
         } 
     }
         
-    private void labelMouseDragged(java.awt.event.MouseEvent evt,int x, int y) { //para evento
-    moverConMouse(evt,x,y);
+    private void labelMouseDragged(java.awt.event.MouseEvent evt,int x, int y,String Personaje) { //para evento
+    moverConMouse(evt,x,y,Personaje);
     }
     
-    public void moverConMouse(java.awt.event.MouseEvent evento,int x, int y) { //Final del movimiento //Colocar transferencia de imagen
-    COLA_PLANTAS[x][y].setLocation(COLA_PLANTAS[x][y].getX() + evento.getX() - COLA_PLANTAS[x][y].getWidth() / 2, COLA_PLANTAS[x][y].getY() + evento.getY() - COLA_PLANTAS[x][y].getHeight() / 2);
+    public void moverConMouse(java.awt.event.MouseEvent evento,int x, int y,String Personaje) { //Final del movimiento //Colocar transferencia de imagen
+        if(Personaje.equals("Planta")){
+            COLA_PLANTAS[x][y].setLocation(COLA_PLANTAS[x][y].getX() + evento.getX() - COLA_PLANTAS[x][y].getWidth() / 2, COLA_PLANTAS[x][y].getY() + evento.getY() - COLA_PLANTAS[x][y].getHeight() / 2);
+            //Pre_JUEGO.Cola.POP();    
+        }else{
+            PILA_ZOMBIES[x][y].setLocation(PILA_ZOMBIES[x][y].getX() + evento.getX() - PILA_ZOMBIES[x][y].getWidth() / 2, PILA_ZOMBIES[x][y].getY() + evento.getY() - PILA_ZOMBIES[x][y].getHeight() / 2);
+            //Pre_JUEGO.Pila.POP();
+        }
+    
     }
     
     public void DIBUJAR_VECTOR_ZOMBIES(){
         PILA_ZOMBIES = new JLabel[1][5];
+        boolean Bandera=false;
         for(int i=0;i<1;i++){
             for(int j=0;j<5;j++){ 
                 PILA_ZOMBIES[i][j] = new JLabel();           
                 PILA_ZOMBIES[i][j].setBounds((i *100)+659,(j*(330/5))+10,100,330/5);
                 PILA_ZOMBIES[i][j].setIcon(ajustarImagen_PLANTAS_ZOMBIES(Pre_JUEGO.Pila.RECORRER_OBTENER_IMAGEN(j)));
                 PILA_ZOMBIES[i][j].setBorder(BorderFactory.createEmptyBorder(0,0,0,0));
-                //this.jPanel2.add(PILA_ZOMBIES[i][j]);
+                if(!Bandera){
+                k2=i;
+                m2=j;
+                PILA_ZOMBIES[k2][m2].addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+                
+                    public void mouseDragged(java.awt.event.MouseEvent evt) {
+                    labelMouseDragged(evt,k,m,"Zombie");
+                    }
+                });
+                Bandera= true;
+                }
                 this.add(PILA_ZOMBIES[i][j]);
            }
         } 
     }
-        
     private ImageIcon ajustarImagen(String ico)
     {
-        ImageIcon tmpIconAux = new ImageIcon(ico);     
+        ImageIcon tmpIconAux = new ImageIcon(getClass().getResource(ico));     
         ImageIcon tmpIcon;
         tmpIcon = new ImageIcon(tmpIconAux.getImage().getScaledInstance(DIMENSION_TABLERO_X / Pre_JUEGO.Numero_Filas, DIMENSION_TABLERO_Y / Pre_JUEGO.Numero_Columnas, Image.SCALE_DEFAULT));
         return tmpIcon;
@@ -187,6 +204,7 @@ public class JUEGO extends javax.swing.JFrame {
 
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        jMenuItem7 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -196,8 +214,18 @@ public class JUEGO extends javax.swing.JFrame {
         jMenuItem6 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         jMenu1.setText("Archivo");
+
+        jMenuItem7.setText("Salir");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem7);
+
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Ver");
@@ -421,6 +449,11 @@ salida.append("{");
         }
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -466,5 +499,6 @@ salida.append("{");
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
     // End of variables declaration//GEN-END:variables
 }
